@@ -4,6 +4,11 @@
 var express = require('express');
 var app = express(); // application instance
 
+var bodyParser = require('body-parser');
+
+app.use(express.static('public')); //serve static file in the public directory
+app.use(bodyParser.json());
+
 // route url
 app.get('/', function(req, res) {
 });

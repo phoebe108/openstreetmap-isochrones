@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="app" lang="en">
   <head>
     <meta charset="UTF-8">
     <title></title>
@@ -7,7 +7,12 @@
     <link rel="stylesheet" href="./bower_components/bootstrap-css/css/bootstrap.css">
     <link rel="stylesheet" href="./style.css">
   </head>
-  <body>
+  <body class="margin">
+    <h1>OpenStreetMap Isochrones</h1>
+    <div ng-controller="MapCtrl">
+      <div id="map"></div>
+    </div>
+
     <script src="./bower_components/leaflet/dist/leaflet.js"></script>
     <script src="./bower_components/angular/angular.js"></script>
     <script src="./bower_components/angular-bootstrap/ui-bootstrap.js"></script>

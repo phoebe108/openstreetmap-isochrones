@@ -1,0 +1,8 @@
+.margin {
+    margin: 30px;
+}
+
+#map {
+    height: 400px !important;
+    margin: 20px auto;
+}
