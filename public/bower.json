@@ -1,0 +1,25 @@
+{
+  "name": "openstreetmap-isochrones",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Phoebe Merritt"
+  ],
+  "license": "''",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "leaflet": "^0.7.7",
+    "angular-bootstrap": "^1.1.2",
+    "bootstrap-css": "^3.3.6"
+  }
+}
