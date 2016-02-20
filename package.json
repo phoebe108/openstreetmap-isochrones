@@ -7,12 +7,14 @@
     "osrm-isochrone": "~2.0.0",
     "turf-concave": "~1.1.3",
     "body-parser": "^1.15.0",
-    "bower": "^1.7.7"
+    "bower": "^1.7.7",
+    "browserify": "^13.0.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "browserify public/client.js > -o public/bundle.js -d"
   },
   "author": "Phoebe Merritt",
   "license": "MIT"

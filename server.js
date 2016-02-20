@@ -25,7 +25,7 @@ app.post('/osrm', function(req, res, next) {
         var iso = {};
         var options = {
             resolution: 25, // sample resolution
-            maxspeed: 4, // in 'unit'/hour
+            maxspeed: 3, // in 'unit'/hour
             unit: 'miles', // 'miles' or 'kilometers'
             network: __dirname + '/nairobi_foot/nairobi_kenya.osrm' // prebuild dc osrm network file
         };
