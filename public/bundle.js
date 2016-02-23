@@ -3,8 +3,6 @@ var app = angular.module('app', ['ui.bootstrap']);
 
 require('./map.js');
 require('./walkshed.js');
-
-
 },{"./map.js":2,"./walkshed.js":3}],2:[function(require,module,exports){
 /**
  * Created by phoebe on 2/18/16.
@@ -86,6 +84,7 @@ module.exports = angular.module('app').controller('WalkshedCtrl', function($scop
         "weight": 5,
         "opacity": 1
     };
+
 
     // rework json into Leaflet-recognizable GeoJSON
     function getProperGeojsonFormat(data) {
