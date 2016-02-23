@@ -2,9 +2,10 @@
  * Created by phoebe on 2/18/16.
  */
 
-module.exports = angular.module('app').controller('WalkshedCtrl', function($scope, $http) {
+module.exports = angular.module('app').controller('WalkshedCtrl', function($scope, $rootScope, $http) {
     $scope.chosenTool = 'OTP';
-    var properGeoJSON = {};
+    var isoGeojson = {};
+    var url = '';
 
     var isoLineStyle = {
         "color": 'red',
@@ -12,7 +13,12 @@ module.exports = angular.module('app').controller('WalkshedCtrl', function($scop
         "opacity": 1
     };
 
-    var url = '';
+    // remove the isochrone json from the leaflet map
+    function removeIsoLayer() {
+        if($scope.isochroneLayer) {
+            map.removeLayer($scope.isochroneLayer);
+        }
+    }
 
     // get color depending on travel time value
     function getColor(t) {
@@ -49,26 +55,27 @@ module.exports = angular.module('app').controller('WalkshedCtrl', function($scop
 
     // rework json into Leaflet-recognizable GeoJSON
     function getProperGeojsonFormat(data) {
-        $scope.isoGeojson = {"type": "FeatureCollection", "features": []};
+        isoGeojson = {"type": "FeatureCollection", "features": []};
 
         data.forEach(function(element, index) {
-            $scope.isoGeojson.features[index] = {};
-            $scope.isoGeojson.features[index].type = 'Feature';
-            $scope.isoGeojson.features[index].properties = element.properties;
-            $scope.isoGeojson.features[index].geometry = {};
-            $scope.isoGeojson.features[index].geometry.coordinates = [];
-            $scope.isoGeojson.features[index].geometry.type = 'MultiPolygon';
+            isoGeojson.features[index] = {};
+            isoGeojson.features[index].type = 'Feature';
+            isoGeojson.features[index].properties = element.properties;
+            isoGeojson.features[index].geometry = {};
+            isoGeojson.features[index].geometry.coordinates = [];
+            isoGeojson.features[index].geometry.type = 'MultiPolygon';
 
             element.geometry.geometries.forEach(function(el) {
-                $scope.isoGeojson.features[index].geometry.coordinates.push(el.coordinates);
+                isoGeojson.features[index].geometry.coordinates.push(el.coordinates);
             });
         });
-        return $scope.isoGeojson;
+        $rootScope.$broadcast('isochrones', {isoGeom: isoGeojson});
+        //return $scope.isoGeojson;
     }
 
     // get OSRM isochrones
-    function osrmIso() {
-        $http.post('/osrm', $scope.coords)
+    function osrmIso(coordinates) {
+        $http.post('/osrm', coordinates)
             .success(function(response) {
 
                 // add isochrone json to the leaflet map
@@ -80,20 +87,22 @@ module.exports = angular.module('app').controller('WalkshedCtrl', function($scop
     }
 
     // get OTP isochrones
-    function otpIso() {
-        url = 'http://localhost:8080/otp/routers/default/isochrone?&fromPlace=' + $scope.coords + '&date=2015/01/09&time=12:00:00&mode=WALK&walkSpeed=4&cutoffSec=600&cutoffSec=1200&cutoffSec=2400&callback=JSON_CALLBACK';
+    function otpIso(coordinates) {
+        url = 'http://localhost:8080/otp/routers/default/isochrone?&fromPlace=' + coordinates + '&date=2015/01/09&time=12:00:00&mode=WALK&walkSpeed=4&cutoffSec=600&cutoffSec=1200&cutoffSec=2400&callback=JSON_CALLBACK';
 
         // request to OTP service for json isochrone polygons
-        $http.jsonp($scope.url)
+        $http.jsonp(url)
             .success(function(response) {
-
-                // add the isochrone json to the leaflet map
-                properGeoJSON = getProperGeojsonFormat(response);
-                $scope.isochroneLayer = L.geoJson(properGeoJSON, {style: getStyle}).addTo(map);
+                getProperGeojsonFormat(response);
             })
             .error(function(response) {
                 console.log(response);
             });
     }
+
+    // calculate isochrones
+    $scope.$on('mapClick', function(event, args){
+        otpIso(args.coords);
+    });
 
 });
