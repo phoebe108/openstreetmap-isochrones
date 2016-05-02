@@ -8,20 +8,30 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body class="margin">
-    <h1>OpenStreetMap Isochrones</h1>
+
+    <h1 class="title">OpenStreetMap Isochrones</h1>
+
     <div ng-controller="MapCtrl">
-      <div id="map"></div>
-    </div>
-    <div ng-controller="WalkshedCtrl">
-      <div class="btn-group">
-        <label class="btn btn-primary" ng-model="chosenTool" ng-click="removeIsoLayer()" uib-btn-radio="'OTP'">OTP</label>
-        <label class="btn btn-primary" ng-model="chosenTool" ng-click="removeIsoLayer()" uib-btn-radio="'OSRM'">OSRM</label>
+
+      <div class="osrm">
+        <h3>OSRM (OpenStreetMap Routing Service)</h3>
+        <button type="button" class="btn btn-primary calcButton" ng-model="osrmToggle" btn-checkbox ng-click="singleModel = 'DISABLE'">
+          ENABLE
+        </button>
+        <div id="map1" class="map"></div>
       </div>
-    </div>
+
+      <div class="otp">
+        <h3>OTP (OpentripPlanner)</h3>
+        <button type="button" class="btn btn-primary calcButton" ng-model="otpToggle" btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" ng-click="singleModel = 'DISABLE'">
+          ENABLE
+        </button>
+        <div id="map2" class="map"></div>
+      </div>
 
     <script src="./bower_components/leaflet/dist/leaflet.js"></script>
     <script src="./bower_components/angular/angular.js"></script>
     <script src="./bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-    <script src="bundle.js"></script>
+    <script src="./js/bundle.js"></script>
   </body>
 </html>

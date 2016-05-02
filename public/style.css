@@ -2,7 +2,35 @@
     margin: 30px;
 }
 
-#map {
+.title {
+    margin: 0 auto;
+}
+
+.osrm {
+    float: right;
+    display: inline-block;
+}
+
+.otp {
+    float: left;
+    display: inline-block;
+}
+
+.calcButton {
+    margin: 10px 0;
+    display: block;
+}
+
+.map {
     height: 400px !important;
+    width: 400px;
     margin: 20px auto;
+}
+
+#map1 {
+    float: left;
+}
+
+#map2 {
+    float: right;
 }

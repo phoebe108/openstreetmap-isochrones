@@ -10,18 +10,25 @@ require('./walkshed.js');
 
 module.exports = angular.module('app').controller('MapCtrl', function($scope, $rootScope) {
 
-    var map = L.map('map').setView([-1.265236,36.806609], 13);
+    var map1 = L.map('map1').setView([-1.265236,36.806609], 13);
+    var map2 = L.map('map2').setView([-1.265236,36.806609], 13);
 
     // add basemap to the leaflet map
     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 18
-    }).addTo(map);
+    }).addTo(map1);
+
+    // add basemap to the leaflet map2
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+    }).addTo(map2);
 
     // remove the isochrone json from the leaflet map
     function removeIsoLayer() {
         if($scope.isochroneLayer) {
-            map.removeLayer($scope.isochroneLayer);
+            map1.removeLayer($scope.isochroneLayer);
         }
     }
 

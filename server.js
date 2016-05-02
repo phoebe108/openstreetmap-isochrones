@@ -42,6 +42,6 @@ app.post('/osrm', function(req, res, next) {
 });
 
 // starts a server and listens on port 3001
-app.listen(3001, function() {
-    console.log('Listening on port 3001');
+app.listen(3030, function() {
+    console.log('Listening on port 3030');
 });
