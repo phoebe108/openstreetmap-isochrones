@@ -6,16 +6,19 @@ module.exports = angular.module('app').service('mapService', function() {
 
     var mapService = {};
 
-    // define leaflet maps
-    mapService.map1 = L.map('map1').setView([-1.265236,36.806609], 13);
-    mapService.map2 = L.map('map2').setView([-1.265236,36.806609], 13);
-
-    // add basemap
-    mapService.addBasemap = function (map) {
-        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // initialize maps
+    mapService.init = function(map) {
+        // define basemap layer
+        var basemap = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 18
-        }).addTo(map);
+        });
+
+        // define leaflet maps
+        mapService[map] = L.map(map).setView([-1.265236,36.806609], 13);
+
+        // add basemap
+        basemap.addTo(mapService[map]);
     };
 
     // isoline style
@@ -58,5 +61,6 @@ module.exports = angular.module('app').service('mapService', function() {
         };
     };
 
+    return mapService;
 });
 

@@ -7,12 +7,22 @@ module.exports = angular.module('app').controller('MapCtrl', function($scope, ma
     $scope.osrmToggle = 'ENABLE';
     $scope.otpToggle = 'ENABLE';
 
-    var osrmLayers = L.geoJson().addTo(mapService.map1);
-    var otpLayers = L.geoJson().addTo(mapService.map2);
+    // initialize maps
+    mapService.init(map1);
+    mapService.init(map2);
 
-    mapService.addBasemap(mapService.map1);
-    mapService.addBasemap(mapService.map2);
+    $scope.toggle = function() {
+        if ($scope.osrmToggle === 'ENABLE') {
+            $scope.osrmToggle = 'DISABLE';
+        }
+        else {
+            $scope.osrmToggle = 'ENABLE';
+            mapService.map1.removeLayer(osrmLayers);
+        }
+    };
 
+    var osrmLayers = L.geoJson(); //.addTo(mapService.map1);
+    var otpLayers = L.geoJson(); //.addTo(mapService.map2);
 
     // calculate travel time on osrm map
     mapService.map1.on('click', function(e) {
