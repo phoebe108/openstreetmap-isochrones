@@ -39,5 +39,7 @@ module.exports = angular.module('app').service('otpService', function() {
                 console.log(response);
             });
     };
+
+    return otpService;
 });
 

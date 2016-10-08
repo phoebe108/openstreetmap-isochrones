@@ -17,5 +17,6 @@ module.exports = angular.module('app').service('osrmService', function() {
             });
     };
 
+    return osrmService;
 });
 
