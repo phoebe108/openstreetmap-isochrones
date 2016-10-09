@@ -16,8 +16,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "build": "browserify public/client.js -o public/bundle.js",
-    "watch": "watchify public/client.js -o public/bundle.js -v"
+    "build": "browserify public/js/client.js -o public/js/bundle.js",
+    "watch": "watchify public/js/client.js -o public/js/bundle.js -v"
   },
   "author": "Phoebe Merritt",
   "license": "MIT"

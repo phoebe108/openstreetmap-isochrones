@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ui.bootstrap']);
 
-require('./controllers/map.js');
-require('./services/mapService.js');
-require('./services/osrmService.js');
-require('./services/otpService.js');
+require('./controllers/map');
+require('./services/TravelTool');
+require('./services/osrmService');
+require('./services/otpService');
