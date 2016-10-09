@@ -21,10 +21,12 @@ module.exports = angular.module('app').factory('TravelTool', function () {
         // map layers
         this.layers = [];
         this.enabled = false;
-        this.calc = function(coords) {
-            calc(coords);
 
+        // calculate layers
+        this.calc = function (coords, callback) {
+            calc(coords, callback);
         };
+
         // creating reference to "this" for the following event handler
         var self = this;
 
@@ -36,13 +38,15 @@ module.exports = angular.module('app').factory('TravelTool', function () {
                 if (self.layers.length > 0) {
                     self.map.removeLayer(self.layers);
                 }
-                var polygons = self.calc([e.latlng.lat, e.latlng.lng]);
-
-                // add polygons to map
-                self.layers = L.geoJson(polygons.features, {style: getStyle}).addTo(self.map);
+                self.calc([e.latlng.lat, e.latlng.lng], self.addLayers);
             }
 
         });
+
+        // add layers to map
+        this.addLayers = function (geom) {
+            self.layers.push(L.geoJson(geom, {style: getStyle(geom)}).addTo(self.map));
+        };
     }
 
     return TravelTool;
