@@ -19,6 +19,7 @@ module.exports = angular.module('app').controller('MapCtrl', function ($scope, o
         } else {
             $scope[tool + 'Button'] = 'ENABLE';
             tools[tool].enabled = false;
+            tools[tool].removeLayers();
         }
     };
 });

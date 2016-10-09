@@ -18,8 +18,6 @@ module.exports = angular.module('app').factory('TravelTool', function () {
         // add basemap
         basemap.addTo(this.map);
 
-        // map layers
-        this.layers = [];
         this.enabled = false;
 
         // calculate layers
@@ -35,17 +33,25 @@ module.exports = angular.module('app').factory('TravelTool', function () {
             if (self.enabled === true) {
 
                 // remove map layer if exists
-                if (self.layers.length > 0) {
-                    self.map.removeLayer(self.layers);
-                }
-                self.calc([e.latlng.lat, e.latlng.lng], self.addLayers);
+                self.removeLayers();
+
+                // calculate geometry
+                self.calc([e.latlng.lat, e.latlng.lng], self.addLayer);
             }
 
         });
 
-        // add layers to map
-        this.addLayers = function (geom) {
-            self.layers.push(L.geoJson(geom, {style: getStyle(geom)}).addTo(self.map));
+        // add layer to map
+        this.addLayer = function (geom) {
+            self.layer = (L.geoJson(geom, {style: getStyle(geom)}));
+            self.layer.addTo(self.map);
+        };
+
+        // remove layer from map
+        this.removeLayers = function() {
+            if (self.layer) {
+                self.map.removeLayer(self.layer);
+            }
         };
     }
 
