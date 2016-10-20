@@ -38,3 +38,4 @@ jspm_packages
 
 # generated dist files
 bundle.js
+public/js/bundle.js
