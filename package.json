@@ -3,18 +3,19 @@
   "version": "0.0.1",
   "main": "server.js",
   "dependencies": {
-    "express": "~4.13.4",
-    "osrm-isochrone": "~2.0.0",
-    "turf-concave": "~1.1.3",
     "body-parser": "^1.15.0",
-    "bower": "^1.7.7"
+    "bower": "^1.7.7",
+    "express": "^4.14.0",
+    "osrm-isochrone": "~2.0.0",
+    "turf-concave": "~1.1.3"
   },
   "devDependencies": {
     "watchify": "^3.7.0",
-    "browserify": "^13.0.0"
+    "browserify": "^13.0.0",
+    "snyk": "^1.19.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "snyk test",
     "start": "node server.js",
     "build": "browserify public/js/client.js -o public/js/bundle.js",
     "watch": "watchify public/js/client.js -o public/js/bundle.js -v"
