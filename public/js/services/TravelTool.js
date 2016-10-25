@@ -13,7 +13,7 @@ module.exports = angular.module('app').factory('TravelTool', function () {
         });
 
         // define leaflet maps
-        this.map = L.map(map).setView([-1.265236, 36.806609], 13);
+        this.map = L.map(map).setView([-1.265236, 36.806609], 12);
 
         // add basemap
         basemap.addTo(this.map);
