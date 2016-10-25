@@ -8,7 +8,7 @@ module.exports = angular.module('app').controller('MapCtrl', function ($scope, o
     $scope.otpButton = 'ENABLE';
 
     var tools = {
-        osrm: new TravelTool('map1', osrmService.getTravelTime, osrmService.isoLineStyle),
+        osrm: new TravelTool('map1', osrmService.getTravelTime, osrmService.getStyle),
         otp: new TravelTool('map2', otpService.getTravelTime, otpService.getStyle)
     };
 
